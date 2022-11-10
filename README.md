@@ -32,7 +32,7 @@ formatters, feel free to make a PR!
 
 ## Endorsements
 
-This formatter is endornsed by [DPC](https://ptb.discord.com/channels/273534239310479360/273539705595756544/1040196273548050442).
+This formatter is endorsed by [DPC](https://ptb.discord.com/channels/273534239310479360/273539705595756544/1040196273548050442).
 
 (That message is in [the Rust programming language community server.](https://discord.gg/rust-lang-community))
 
