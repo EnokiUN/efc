@@ -9,6 +9,7 @@ fn main() -> Result<()> {
         Some(formatter) => match formatter.to_lowercase().as_ref() {
             "c" | "centre" | "center" => Ok(Formatter::Centre),
             "o" | "outdent" => Ok(Formatter::Outdent),
+            "r" | "ra" | "rl" | "ralign" | "rightalign" => Ok(Formatter::RightAlign),
             "-h" | "--help" => {
                 send_help();
                 return Ok(());

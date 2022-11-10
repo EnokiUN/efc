@@ -1,5 +1,6 @@
 mod centre;
 mod outdent;
+mod ralign;
 
 use std::{fs, io::stdin, path::PathBuf};
 
@@ -17,7 +18,7 @@ macro_rules! formatters {
     };
 }
 
-formatters!(Centre, Outdent);
+formatters!(Centre, Outdent, RightAlign);
 
 #[derive(Debug)]
 pub struct Params {
@@ -30,6 +31,7 @@ pub fn format(params: Params) -> Result<()> {
     let formatter = match params.formatter {
         Formatter::Centre => centre::centre,
         Formatter::Outdent => outdent::outdent,
+        Formatter::RightAlign => ralign::ralign,
     };
 
     if params.files.is_empty() {
