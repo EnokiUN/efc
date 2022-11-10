@@ -54,14 +54,36 @@ pub fn format(params: Params) -> Result<()> {
     }
 
     for file in params.files.into_iter() {
-        let code = fs::read_to_string(&file)
-            .with_context(|| format!("Could not read file {}", file.display()))?;
-        let code = formatter(code);
-        match params.write {
-            false => println!("{}", code),
-            true => fs::write(&file, code)
-                .with_context(|| format!("Could not write to file {}", file.display()))?,
+        format_file(file, &formatter, params.write)?;
+    }
+
+    Ok(())
+}
+
+fn format_file<F>(file: PathBuf, formatter: &F, write: bool) -> Result<()>
+where
+    F: Fn(String) -> String,
+{
+    if file.is_dir() {
+        for file in file
+            .read_dir()
+            .with_context(|| format!("Could not read directory {}", file.display()))?
+        {
+            let file = file?.path();
+            if !write {
+                println!("----------{}----------", file.display());
+            }
+            format_file(file, formatter, write)?;
         }
+        return Ok(());
+    }
+    let code = fs::read_to_string(&file)
+        .with_context(|| format!("Could not read file {}", file.display()))?;
+    let code = formatter(code);
+    match write {
+        false => println!("{}", code),
+        true => fs::write(&file, code)
+            .with_context(|| format!("Could not write to file {}", file.display()))?,
     }
 
     Ok(())
