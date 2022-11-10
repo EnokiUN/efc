@@ -11,7 +11,7 @@ on being lightweight.
 To install this CLI just run
 
 ```sh
-cargo install --git https://github.com/enokiun/tfc
+cargo install --git https://github.com/enokiun/efc
 ```
 
 ## Usage
