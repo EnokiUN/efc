@@ -42,8 +42,7 @@ pub fn format(params: Params) -> Result<()> {
                 formatter(
                     stdin()
                         .lines()
-                        .filter(|l| l.is_ok())
-                        .map(|l| l.unwrap())
+                        .filter_map(|l| l.ok())
                         .collect::<Vec<String>>()
                         .join("\n")
                 )
